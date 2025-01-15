@@ -263,9 +263,8 @@ static jlongArray netty_io_uring_setup(JNIEnv *env, jclass clazz, jint entries) 
     struct io_uring_params p;
     memset(&p, 0, sizeof(p));
 
-#ifdef IORING_SETUP_SUBMIT_ALL
+    // Always use IORING_SETUP_SUBMIT_ALL if possible.
     p.flags = IORING_SETUP_SUBMIT_ALL;
-#endif
 
     jlongArray array = (*env)->NewLongArray(env, 21);
     if (array == NULL) {
